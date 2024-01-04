@@ -58,7 +58,8 @@ class ReportActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             showMonthYearPickerDialog()
         }*/
 
-        binding.year.text = months+" , "+"2024"
+
+        binding.year.text = "Jan"+" , "+"2024"
         binding.year.setCompoundDrawablesWithIntrinsicBounds(R.drawable.cal, 0,0 , 0)
         binding.year.setOnClickListener {
             showMonthYearPickerDialog()
@@ -116,12 +117,10 @@ class ReportActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
         // Update UI with the selected month and year
        // binding.month.text = getMonthName(selectedMonth.toInt())
-
-
         // Save the selected month and year to your variables if needed
         months = selectedMonth
         years = selectedYear;
-        binding.year.text = months + " , "+years;
+        binding.year.text = getMonthName(selectedMonth.toInt()) + " , "+years;
         // Perform API call with the selected date
         ApiCall()
     }

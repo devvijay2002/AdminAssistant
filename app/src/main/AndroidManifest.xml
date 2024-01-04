@@ -39,10 +39,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name="com.example.authenticationmodule.LoginActivity"
             android:exported="false" />
+
         <activity
             android:name="com.example.authenticationmodule.SignUpActivity"
             android:exported="false"
