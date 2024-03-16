@@ -2,6 +2,7 @@ package com.example.admindata
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
@@ -224,11 +225,12 @@ private fun hitUserData1(){
 }
 
     private fun observeUserData() {
+        val instaId = myPreferences.getString("InstaId", "")
         m1ViewModel.UserResp.observe(this) { userData ->
             if (userData.status == true) {
                 binding.userFollowers.visibility = View.VISIBLE
                 binding.cardView2.visibility = View.VISIBLE
-
+                Log.d("userId", userData.toString())
                 binding.userProfile.apply {
                     m1ViewModel.UserResp.observe(this@MainActivity) { userResponse ->
                         // Check if the URI is not null before loading the image
@@ -242,7 +244,7 @@ private fun hitUserData1(){
 
                 binding.userFollowers.visibility = View.VISIBLE
                 binding.userFollowers.text="Your Current Followers: ${userData.userFollowers}"
-                hitPostUserData(userData.instagramUsername, userData.userFollowers)
+                hitPostUserData(instaId, userData.userFollowers)// post api
             } else {
 
                 binding.userFollowers.visibility = View.VISIBLE

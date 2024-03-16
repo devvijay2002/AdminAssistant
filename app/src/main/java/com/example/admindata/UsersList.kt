@@ -66,6 +66,7 @@ class UsersList : AppCompatActivity() {
 
     private fun navigateToNextActivity(username: String) {
         myPreferences.saveString("InstaId", username)
+      //  myPreferences.getString("InstaId", "")
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra("userName", username)
         startActivity(intent)
