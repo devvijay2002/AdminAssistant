@@ -227,7 +227,7 @@ private fun hitUserData1(){
     private fun observeUserData() {
         val instaId = myPreferences.getString("InstaId", "")
         m1ViewModel.UserResp.observe(this) { userData ->
-            if (userData.status == true) {
+            if (userData !=null) {
                 binding.userFollowers.visibility = View.VISIBLE
                 binding.cardView2.visibility = View.VISIBLE
                 Log.d("userId", userData.toString())
@@ -262,11 +262,10 @@ private fun hitUserData1(){
         }
     }
     private fun hitUserData(username: String) {
-        val baseUrl = "https://instaskull.com/"
-        val endUrl = "tucktools_new?username=$username"
+        val baseUrl = "https://vackao.supportapp.cloud/v1/api/instagram/"
         val referer = "https://www.tucktools.com/"
         val secFetchSite = "cross-site"
-        m1ViewModel.hitUserData("$baseUrl$endUrl", referer, secFetchSite)
+        m1ViewModel.hitUserData("$baseUrl$username", referer, secFetchSite)
     }
 
     private fun hitUpdatedUserData() {

@@ -1,5 +1,6 @@
 package com.example.admindata.viewModel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 
 import com.example.modelresp.UserResp
@@ -16,6 +17,7 @@ import io.reactivex.schedulers.Schedulers
     val UserResp = MutableLiveData<UserResp>()
 
       fun hitUserData(url: String, referer: String, secFetchSite: String) {
+          Log.d("url-->", "$url: ")
           disposable = api.getUserData(url, referer, secFetchSite)
               .subscribeOn(Schedulers.io())
               .observeOn(AndroidSchedulers.mainThread())
