@@ -227,28 +227,32 @@ private fun hitUserData1(){
     private fun observeUserData() {
         val instaId = myPreferences.getString("InstaId", "")
         m1ViewModel.UserResp.observe(this) { userData ->
-            if (userData !=null) {
+            if (userData != null && userData.userDataList.isNotEmpty()) {
+                val firstUserData = userData.userDataList[0]
+
+                // Show UI elements
                 binding.userFollowers.visibility = View.VISIBLE
                 binding.cardView2.visibility = View.VISIBLE
-                Log.d("userId", userData.toString())
-                binding.userProfile.apply {
-                    m1ViewModel.UserResp.observe(this@MainActivity) { userResponse ->
-                        // Check if the URI is not null before loading the image
-                        userResponse?.userProfilePic?.let { uriString ->
-                            Glide.with(this)
-                                .load(uriString)
-                                .into(this)
-                        }
-                    }
+
+                // Log user data
+                Log.d("userId", firstUserData.toString())
+
+                // Load user profile picture using Glide
+                firstUserData.profilePicUrl?.let { uriString ->
+                    Glide.with(this@MainActivity)
+                        .load(uriString)
+                        .into(binding.userProfile)
                 }
 
-                binding.userFollowers.visibility = View.VISIBLE
-                binding.userFollowers.text="Your Current Followers: ${userData.userFollowers}"
-                hitPostUserData(instaId, userData.userFollowers)// post api
-            } else {
+                // Update user followers text
+                binding.userFollowers.text = "Your Current Followers: ${firstUserData.followingCount}"
 
+                // Call post API
+                hitPostUserData(instaId, firstUserData.followingCount)
+            } else {
+                // Show error message if user data is null or empty
                 binding.userFollowers.visibility = View.VISIBLE
-                binding.userFollowers.text = "Invalid User ID: "
+                binding.userFollowers.text = "Invalid User ID"
             }
         }
 
