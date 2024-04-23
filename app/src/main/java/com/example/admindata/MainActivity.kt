@@ -244,11 +244,12 @@ private fun hitUserData1(){
                         .into(binding.userProfile)
                 }
 
+
                 // Update user followers text
-                binding.userFollowers.text = "Your Current Followers: ${firstUserData.followingCount}"
+                binding.userFollowers.text = "Your Current Followers: ${firstUserData.followerCount}"
 
                 // Call post API
-                hitPostUserData(instaId, firstUserData.followingCount)
+                hitPostUserData(instaId, firstUserData.followerCount)
             } else {
                 // Show error message if user data is null or empty
                 binding.userFollowers.visibility = View.VISIBLE
